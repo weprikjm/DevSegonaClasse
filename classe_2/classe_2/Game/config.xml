@@ -1,0 +1,21 @@
+<!-- Config file for the game -->
+
+<config>
+	<window>
+		<name>Super Combo</name>
+		<resolution>false</resolution>
+		<borderless>false</borderless>
+		<resizable>false</resizable>
+		<windowed>false</windowed>
+		<width>640</width>
+		<height>480</height>
+	</window>
+	
+	
+	
+	
+	
+	
+	
+	
+</config>
