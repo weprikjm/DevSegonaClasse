@@ -27,7 +27,7 @@ j1FileSystem::~j1FileSystem()
 }
 
 // Called before render is available
-bool j1FileSystem::Awake()
+bool j1FileSystem::Awake(pugi::xml_node& ConfigWindow)
 {
 	LOG("Loading File System");
 	bool ret = true;
@@ -46,7 +46,7 @@ bool j1FileSystem::Awake()
 // Called before quitting
 bool j1FileSystem::CleanUp()
 {
-	//LOG("Freeing File System subsystem");
+	LOG("Freeing File System subsystem");
 
 	return true;
 }

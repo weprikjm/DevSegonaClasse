@@ -42,6 +42,7 @@ public:
 	int GetArgc() const;
 	const char* GetArgv(int index) const;
 
+
 private:
 
 	// Call modules before each loop iteration
@@ -58,6 +59,8 @@ private:
 
 	// Call modules after each loop iteration
 	bool PostUpdate();
+
+	bool LoadConfig();
 
 public:
 

@@ -25,7 +25,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
-	AddModule(render);
+	
 	AddModule(fs);
 	AddModule(input);
 	AddModule(win);
@@ -34,7 +34,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(scene);
 
 	// render last to swap buffer
-	
+	AddModule(render);
 }
 
 // Destructor
@@ -63,36 +63,49 @@ void j1App::AddModule(j1Module* module)
 // Called before render is available
 bool j1App::Awake()
 {
+	bool ret = LoadConfig();
+
+	if (ret == true)
+	{
+		p2List_item<j1Module*>* item;
+		item = modules.start;
+
+		while (item != NULL && ret == true)
+		{
+			// TODO 1: Every awake to receive a xml node with their section of the config file if exists
+
+			ret = item->data->Awake(config.child(item->data->name.GetString()));
+			item = item->next;
+		}
+
+	}
+
+	return ret;
+}
+
+bool j1App::LoadConfig()
+{
+
 	bool ret = true;
 
-	// --- load config file ---
 	char* buf;
 	int size = App->fs->Load("config.xml", &buf);
 	pugi::xml_parse_result result = config_file.load_buffer(buf, size);
-	RELEASE(buf);
+	//RELEASE(buf);
 
-	if(result == NULL)
+	if (result == NULL)
 	{
 		LOG("Could not load map xml file config.xml. pugi error: %s", result.description());
 		ret = false;
 	}
 	else
 		config = config_file.child("config");
-	// ---
 
-	p2List_item<j1Module*>* item;
-	item = modules.start;
-
-	while(item != NULL && ret == true)
-	{
-		// TODO 1: Every awake to receive a xml node with their section of the config file if exists
-
-		ret = item->data->Awake(config.child(item->data->name.GetString()));
-		item = item->next;
-	}
-	
 	return ret;
 }
+
+
+
 
 // Called before the first frame
 bool j1App::Start()
