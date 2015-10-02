@@ -19,11 +19,12 @@ j1Window::~j1Window()
 }
 
 // Called before render is available
-bool j1Window::Awake(pugi::xml_node windowConfig)
+bool j1Window::Awake(pugi::xml_node ConfigWindow)
 {
 	LOG("Init SDL window & surface");
 	bool ret = true;
 
+	ConfigWindow.child("width").child_value().as_int();
 	if(SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
 		LOG("SDL_VIDEO could not initialize! SDL_Error: %s\n", SDL_GetError());
@@ -33,7 +34,9 @@ bool j1Window::Awake(pugi::xml_node windowConfig)
 	{
 		//Create window
 		Uint32 flags = SDL_WINDOW_SHOWN;
+		width = ConfigWindow.child("width").child_value().as_int();
 		width = SCREEN_WIDTH;
+		ConfigWindow.child("height").child_value().as_int();
 		height = SCREEN_HEIGHT;
 		scale = SCALE;
 
@@ -57,7 +60,7 @@ bool j1Window::Awake(pugi::xml_node windowConfig)
 			flags |= SDL_WINDOW_FULLSCREEN_DESKTOP;
 		}
 
-		window = SDL_CreateWindow("", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, windowConfig.child("width").child_value().as_int(), windowConfig.child("height").child_value().as_int(), flags);
+		window = SDL_CreateWindow("", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, flags);
 
 		if(window == NULL)
 		{

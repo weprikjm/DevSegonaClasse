@@ -2,13 +2,16 @@
 
 <config>
 	<window>
-		<name>Super Combo</name>
-		<resolution>false</resolution>
-		<borderless>false</borderless>
-		<resizable>false</resizable>
-		<windowed>false</windowed>
-		<width>640</width>
-		<height>480</height>
+   		<R_FULLSCREEN/>false
+    		<R_BORDERLESS/>false
+    		<R_RESIZABLE/>false
+    		<R_FULLSCR_WINDOWED/>false
+   		<SCREEN_WIDTH/>640
+    		<SCREEN_HEIGHT/> 480
+    		<WINDOW_TITLE/> "My Game"
+    		<SCALE/>1
+    		<ORGANIZATION/>My Awesome Studio
+    		<APPNAME/>My cool game
 	</window>
 	
 	

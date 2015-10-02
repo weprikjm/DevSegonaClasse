@@ -62,15 +62,18 @@ inline const char* const PATH(const char* folder, const char* file)
 // Conf
 
 // TODO 2: move all those defines to data from the config.xml file
-#define R_FULLSCREEN false
-#define R_BORDERLESS false
-#define R_RESIZABLE false
-#define R_FULLSCR_WINDOWED false
-#define SCREEN_WIDTH 640
-#define SCREEN_HEIGHT 480
-//#define WINDOW_TITLE "My Game"
-#define SCALE 1
+
+bool R_FULLSCREEN;
+bool R_BORDERLESS;
+bool R_RESIZABLE;
+bool R_FULLSCR_WINDOWED;
+int SCREEN_WIDTH;
+int SCREEN_HEIGHT;
+
+
+#define WINDOW_TITLE "My Game"
 #define ORGANIZATION "My Awesome Studio"
 #define APPNAME "My cool game"
+
 
 #endif

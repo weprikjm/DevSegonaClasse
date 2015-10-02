@@ -16,8 +16,8 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	frames = 0;
 
 	input = new j1Input();
-	win = new j1Window();
 	render = new j1Render();
+	win = new j1Window();
 	tex = new j1Textures();
 	audio = new j1Audio();
 	scene = new j1Scene();
@@ -25,6 +25,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
+	AddModule(render);
 	AddModule(fs);
 	AddModule(input);
 	AddModule(win);
@@ -33,7 +34,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(scene);
 
 	// render last to swap buffer
-	AddModule(render);
+	
 }
 
 // Destructor
@@ -86,10 +87,10 @@ bool j1App::Awake()
 	{
 		// TODO 1: Every awake to receive a xml node with their section of the config file if exists
 
-		ret = item->data->Awake();
+		ret = item->data->Awake(config.child(item->data->name.GetString()));
 		item = item->next;
 	}
-
+	
 	return ret;
 }
 
